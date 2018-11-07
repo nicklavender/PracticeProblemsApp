@@ -133,15 +133,32 @@ public class MainActivity extends AppCompatActivity {
 //        return s;
 //    }
 
+    /**
+     *
+     * @param s string to urlify
+     * @return return a new string that replaces all spaces with %20
+     */
     public static String URLify(String s) {
         int spacesCount = 0;
         int length = s.length();
-        for(int i = 0; i< length; i++) {
-            if(s.charAt(length - i - 1) == ' ') {
+        for (int i = 0; i < length; i++) {
+            if (s.charAt(length - i - 1) == ' ') {
                 spacesCount++;
             }
         }
-        char[] str = new char[length + 2*spacesCount];
-
+        int urlStringLen = length + 2 * spacesCount;
+        char[] str = new char[urlStringLen];
+        int urlCounter = urlStringLen - 1;
+        for (int i = length - 1; i >= 0; i--) {
+            char current = s.charAt(i);
+            if (current == ' ') {
+                str[urlCounter--] = '0';
+                str[urlCounter--] = '2';
+                str[urlCounter--] = '%';
+            } else {
+                str[urlCounter--] = current;
+            }
+        }
+        return new String(str);
     }
 }

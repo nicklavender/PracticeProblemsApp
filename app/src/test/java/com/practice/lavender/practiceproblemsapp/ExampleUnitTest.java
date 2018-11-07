@@ -56,4 +56,14 @@ public class ExampleUnitTest {
 //        assertEquals("test%20string", MainActivity.URLifyCompressSpaces("test string"));
 //        assertEquals("a%20b%20c%20d",MainActivity.URLifyCompressSpaces("a b c d"));
 //    }
+
+    @Test
+    public void URLifyTest() {
+        String first = "a b";
+        String second = "a b c";
+        String third = " aaa   b b c";
+        assertEquals("a%20b", MainActivity.URLify(first));
+        assertEquals("a%20b%20c", MainActivity.URLify(second));
+        assertEquals("%20aaa%20%20%20b%20b%20c", MainActivity.URLify(third));
+    }
 }
