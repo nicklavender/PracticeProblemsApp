@@ -1,5 +1,7 @@
 package com.practice.lavender.practiceproblemsapp;
 
+import android.util.Log;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -62,8 +64,27 @@ public class ExampleUnitTest {
         String first = "a b";
         String second = "a b c";
         String third = " aaa   b b c";
+        String fourth = "a b c ";
         assertEquals("a%20b", MainActivity.URLify(first));
         assertEquals("a%20b%20c", MainActivity.URLify(second));
         assertEquals("%20aaa%20%20%20b%20b%20c", MainActivity.URLify(third));
+        assertEquals("a%20b%20c%20", MainActivity.URLify(fourth));
+    }
+
+    @Test
+    public void removeDupesLL() {
+        MyLinkedList<String> linkedList = new MyLinkedList<>(new MyLinkedListNode<>("first"));
+        MyLinkedListNode<String> head = linkedList.getHead();
+        head.appendToTail("second");
+        head.appendToTail("third");
+        head.appendToTail("third");
+        head.appendToTail("fourth");
+        head.appendToTail("fifth");
+        head.appendToTail("sixth");
+        MainActivity.removedDupes(linkedList);
+        while(head.getNextNode() != null) {
+            System.out.println((String)head.getData());
+            head = head.getNextNode();
+        }
     }
 }

@@ -5,11 +5,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.w3c.dom.Node;
+
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -161,4 +169,23 @@ public class MainActivity extends AppCompatActivity {
         }
         return new String(str);
     }
+
+
+    public static void removedDupes(MyLinkedList<String> linkedList) {
+        HashSet<String> set = new HashSet<>();
+        MyLinkedListNode current = linkedList.getHead();
+        MyLinkedListNode previous = null;
+        while(current.getNextNode() != null) {
+            if(set.contains((String)current.getData())) {
+                if(previous != null) {
+                    previous.setNextNode(current.getNextNode());
+                }
+            } else {
+                set.add((String)current.getData());
+            }
+            previous = current;
+            current = current.getNextNode();
+        }
+    }
+
 }
